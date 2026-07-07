@@ -7,6 +7,7 @@ Before going to ask business question, i would like to dive deep into understand
 
 The exploration is organized into the following sections:
 | File  | Description  |
+|-------|--------------|
 | '01_data_quality.md' | Missing values, duplicates, primary keys, and data validation |
 | '02_customer_analysis.md' | Exploration of customer information and geographic distribution |
 | '03_order_analysis.md' | Order statuses, dates, delivery information, and order characteristics |
