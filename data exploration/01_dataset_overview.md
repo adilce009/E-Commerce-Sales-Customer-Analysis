@@ -7,6 +7,7 @@ First, let's know how many tables are there in the dataset? The following query 
 The query output is 9
 
 Next, determine the number of rows in each table. Here is a sample query for one table. The row numbers of the other table can be found using the same query.
+
 <img src="images/num_rows_in_table.png" width="250">
 
 *Query output: 99441*
@@ -34,6 +35,7 @@ Next, I wanted to know the time/ duration of the transections I will be dealing 
 *The query result shows that the transections happened between the years 2016 and 2018*
 
 Next, I would like to know the number of customers, orders, sellers, and products. These information is found in the respective tables using the following commands.
+
 <img src="images/num_customers_orders_sellers_products.png" width="250">
 
 *The marketplace contains approximately 99k customers, 99k orders, 3k sellers, and 33k products. The relatively small number of sellers compared to products suggests that sellers typically offer multiple products, while the near one-to-one ratio between customers and orders indicates that many customers made only a single purchase.*
