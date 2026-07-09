@@ -127,8 +127,17 @@ Outer query: count how many customers fall into each category.
 
 The percentage of positive reviews is 85.31% which shows a high satisfaction for the product. 
 
+#### Review score by state: Which customer states are the most satisfied?
 
+<img src="ba_images/review_score_by_state.png" width="250">
 
+The *result* shows that the customers from all the states have high satisfaction about the products.
+
+#### Review score by product category: which product categories received highest and lowest ratings?
+
+<img src="ba_images/review_score_by_product_cat.png" width="250">
+
+The above query is actually order wise rating, not specific product/category wise rating. The dataset does not provide reviews for specific categories. Since an order may have multiple items, all the items are rated equally for order review. It’s a limitation of the dataset and we cannot reconcile this issue. One way we could follow is that we could first isolate the orders with a single item and then rate based on those orders only.
 
 
 
