@@ -287,3 +287,58 @@ SELECT COUNT(DISTINCT product_category_name)
 FROM product_category_translation;
 
 -- total_rows = distinct product_category_name
+
+/*
+==========================================================
+          ORDER DISTRIBUTION OVER TIME ANALYSIS
+==========================================================
+
+Purpose:
+Analyze how customer orders are distributed across different
+time periods. Understanding temporal trends helps identify
+seasonality, peak shopping periods, and customer purchasing
+patterns.
+
+The analysis includes:
+1. Orders by Year
+2. Orders by Month
+3. Orders by Weekday
+4. Orders by Hour
+==========================================================
+*/
+
+-- Number of orders placed each year
+
+SELECT
+    EXTRACT(YEAR FROM order_purchase_timestamp) AS year,
+    COUNT(*) AS total_orders
+FROM orders
+GROUP BY year
+ORDER BY year;
+
+-- Number of orders placed each month
+
+SELECT
+    DATE_TRUNC('month', order_purchase_timestamp) AS month,
+    COUNT(*) AS total_orders
+FROM orders
+GROUP BY month
+ORDER BY month;
+
+-- Number of orders placed on each day of the week
+
+SELECT
+    TO_CHAR(order_purchase_timestamp, 'Day') AS weekday,
+    COUNT(*) AS total_orders
+FROM orders
+GROUP BY weekday
+ORDER BY total_orders;
+
+-- Number of orders placed during each hour of the day
+
+SELECT
+    EXTRACT(HOUR FROM order_purchase_timestamp) AS hour,
+    COUNT(*) AS total_orders
+FROM orders
+GROUP BY hour
+ORDER BY hour;
