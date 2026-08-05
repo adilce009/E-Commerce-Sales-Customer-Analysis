@@ -89,9 +89,8 @@ Analyzed key business metrics:
 
 ## Repository Structure
 
-<pre>
+```
 E-Commerce-Sales-Customer-Analysis
-│
 ├── data_exploration
 │   ├── 01_dataset_overview.md
 │   └── 02_PrimaryKey_Grain.md
@@ -105,4 +104,6 @@ E-Commerce-Sales-Customer-Analysis
 │   └── 03_business_analysis.sql
 │
 └── README.md
-</pre>
+```
+
+
