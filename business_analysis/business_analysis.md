@@ -1,23 +1,25 @@
 ## Customer and Seller Distribution Analysis
 
-#### Business Question: Which states contribute most customers?
+#### Business Query: Which states contribute most customers?
 
 The customers table was used because it contains customer location information. Since the analysis is at the customer level, no additional joins are required.
 
 <img src="ba_images/customers_states.png" width="250">
 
 *Output:*
+
 <img src="ba_images/Q1_output.png" width="250">
 
 *Insights from output:* Customer distribution is highly concentrated in SP, which has more than three times the customers of the next largest state (RJ). The customer base is primarily concentrated in the regions SP, RJ, MG, suggesting these regions represent the strongest markets for the platform.
 
-#### Business Question: Which states contribute the most sellers?
+#### Business Query: Which states contribute the most sellers?
 
 The sellers table was used because it contains seller location information. Since the goal is to measure marketplace supply by region, the analysis is performed directly on this table.
 
 <img src="ba_images/sellers_states.png" width="250">
 
 *Output:*
+
 <img src="ba_images/Q2_output.png" width="250">
 
 *Insights from output:* Seller distribution is highly concentrated in state SP, which accounts for a dominant share of marketplace sellers compared with other states. Similar to customer distribution, seller presence is strongest in the Southeast region, particularly SP and MG, indicating that this region acts as the primary marketplace hub.
@@ -28,21 +30,27 @@ The sellers table was used because it contains seller location information. Sinc
 <img src="ba_images/payment_method.png" width="250">
 
 *Output:* 
+
 <img src="ba_images/Q3_output.png" width="250">
-*Result* shows that the most popular payment type is credit card. There are 3 more payment methods. 
+
+*Insights from output:* shows that the most popular payment type is credit card. There are 3 more payment methods. 
 
 #### How are review scores distributed?
 
 <img src="ba_images/review_score_dist.png" width="250">
 
+
 *Output:* <img src="ba_images/Q4_output.png" width="250">
-The reviews are quite positive; most of the reviewers rated it the best.
+
+
+*Insights from output:* The reviews are quite positive; most of the reviewers rated it the best.
 
 #### Average review score
 
 <img src="ba_images/avg_review.png" width="250">
 
-*Result:* The average review score is 4.086 which demonstrates a high satisfaction among the customers.
+
+*Insights from output:* The average review score is 4.086 which demonstrates a high satisfaction among the customers.
 
 ### Revenue analysis
 
@@ -50,13 +58,15 @@ The reviews are quite positive; most of the reviewers rated it the best.
 
 <img src="ba_images/total_rev.png" width="250">
 
-Total revenue was 16 million for the entire duration given in the dataset.
+
+*Insights from output:* Total revenue was 16 million for the entire duration given in the dataset.
 
 #### Find revenue by month.
 
 <img src="ba_images/rev_by_month.png" width="250">
 
-The revenue by does not show a specific trend like a hike on a particular month or a group of months (as we usually see during the month of November due to black friday or during the month of December due to the Christmas). However, during the months of the year 2018 is much higher compared to the months of the other years.
+
+*Insights from output:* The revenue by does not show a specific trend like a hike on a particular month or a group of months (as we usually see during the month of November due to black friday or during the month of December due to the Christmas). However, during the months of the year 2018 is much higher compared to the months of the other years.
 
 #### Find revenue by states
 This is a complex situation where three tables should be involved. 
@@ -64,72 +74,94 @@ This is a complex situation where three tables should be involved.
 <img src="ba_images/rev_by_states.png" width="250">
 
 *Output:* <img src="ba_images/Q5_output_rev_by_state.png" width="250">
-States SP, RJ, and MG contribute to the most amount of revenue. This also alighs with the number of customers and sellers in those states that was shown during dataset analysis. 
+
+*Insights from output:* States SP, RJ, and MG contribute to the most amount of revenue. This also alighs with the number of customers and sellers in those states that was shown during dataset analysis. 
 
 #### Find revenue by seller
 This is a tricky question. One way to solve it as following:
 
 <img src="ba_images/rev_by_seller_1.png" width="250">
 
-But since there may be orders that contain multiple items, an order might be counted multiple times, which will lead to a wrong answer. Instead of the above query, the following is much simpler and accuratly represent the actual revenue.
+*Insights from output:* But since there may be orders that contain multiple items, an order might be counted multiple times, which will lead to a wrong answer. Instead of the above query, the following is much simpler and accurately represent the actual revenue.
 
 <img src="ba_images/rev_by_seller_2.png" width="250">
 
+
 ### Top product category
 Finding the top category product can be with respect to revenue or with respect to the number of products sold. 
+
 #### Top product category with respect to revenue earned
 
 <img src="ba_images/top_cat_revenue.png" width="250">
 
-*Output:* <img src="ba_images/Q6_output_rev_by_prod.png" width="250">
-There are 71 categories of products. The product names are translated into their respective english names with the help of *product_category_translation* table. The *result* of the above query shows that *health_beauty* category generates the most revenue, whereas the *watches_gifts*, *bed_bath_table*, *sports_leisure*, and *computer_accessories* categories are not much behind as well. 
+*Output:* 
+
+<img src="ba_images/Q6_output_rev_by_prod.png" width="250">
+
+*Insights from output:* There are 71 categories of products. The product names are translated into their respective english names with the help of *product_category_translation* table. The *result* of the above query shows that *health_beauty* category generates the most revenue, whereas the *watches_gifts*, *bed_bath_table*, *sports_leisure*, and *computer_accessories* categories are not much behind as well. 
 
 #### Top category with respect to the unit sold
 
 <img src="ba_images/top_cat_unit_sold.png" width="250">
 
-*Output:* <img src="ba_images/Q7_output_sold_by_cat.png" width="250">
+*Output:* 
 
-*bed_bath_table* category products are sold the most whereas the *health_beauty* category places second. It reveals that the *health_beauty* category products produces higher profit margin.  
+<img src="ba_images/Q7_output_sold_by_cat.png" width="250">
+
+*Insights from output:* *bed_bath_table* category products are sold the most whereas the *health_beauty* category places second. It reveals that the *health_beauty* category products produces higher profit margin.  
 
 ### Top sellers
 #### Top seller by revenue (which seller generated the most revenue?)
 
 <img src="ba_images/top_sellers_by_revenue.png" width="250">
 
-*Output:* <img src="ba_images/Q8_output_rev_by_seller.png" width="250">
-There are three sellers who made more than 220K revenue.
+*Output:* 
+
+<img src="ba_images/Q8_output_rev_by_seller.png" width="250">
+
+*Insights from output:* There are three sellers who made more than 220K revenue.
 
 #### Top sellers by item sold
 
 <img src="ba_images/top_sellers_by_unit_sold.png" width="250">
 
-*Output:* <img src="ba_images/Q9_output_unit_sold_by_seller.png" width="250">
-One of the sellers sold more than 2K units whereas there are two more sellers who sold more than 1900 units.
+*Output:* 
+
+<img src="ba_images/Q9_output_unit_sold_by_seller.png" width="250">
+
+*Insights from output:* One of the sellers sold more than 2K units whereas there are two more sellers who sold more than 1900 units.
 
 ### Top customers
 #### Average order value: how much money a customer spent per order?
+
 To find this, I need to use *subquery*. I should consider: some orders may have *multiple payment records* (e.g., split across credit card + voucher) as there is a feature called *payment installment*. So, we may have multiple payments for the same *order_id*.
 
 <img src="ba_images/avg_order_value.png" width="250">
 
-*Result:* The average order value is 160.99
+*Insights from output:* The average order value is 160.99
 
 #### How many customer purchased more than once? 
 Count order per customer
 
 <img src="ba_images/count_order_per_customer.png" width="250">
 
-The above query gives the number of times the customers purchased. But if we want to only see the customers who purchased repeatedly (more than once), then the following query can be used.
+*Insights from output:* The above query gives the number of times the customers purchased. But if we want to only see the customers who purchased repeatedly (more than once), then the following query can be used.
 
 <img src="ba_images/repeat_customer.png" width="250">
+
 
 #### Count how many repeat customer exist.
 
 <img src="ba_images/count_repeat_customers.png" width="250">
 
-*Output:* <img src="ba_images/Q10_output_num_cutomer_type.png" width="250">
+*Output:*
+
+<img src="ba_images/Q10_output_num_cutomer_type.png" width="250">
+
+*Insights from output:* 
+
 #### New vs Repeat customers: how many customers visited one time and how many customers are loyal and repeat coming?
+
 This is a complex query that involves multiple steps:
 First subquery: calculate orders per customer.
 Second subquery: classify customer as One-time or Repeat.
@@ -137,31 +169,36 @@ Outer query: count how many customers fall into each category.
 
 <img src="ba_images/new_vs_old_customers.png" width="250">
 
-*Result* shows that most of the customers (93099) purchased one time and there are close to 3K customers who are loyal and purchased multiple times. From business perspective, a the company might want to attract the big chunk of visiting customers. 
+*Insights from output:* It shows that most of the customers (93099) purchased one time and there are close to 3K customers who are loyal and purchased multiple times. From business perspective, a the company might want to attract the big chunk of visiting customers. 
 
 ### Review score analysis
 #### Distribution of review score: How many 1-star, 2-star, 3-star, 4-star, and 5-star reviews are there?
 
 <img src="ba_images/review_score.png" width="250">
 
-*Output:* <img src="ba_images/Q11_output_rev_score_count.png" width="250">
+*Output:* 
+
+<img src="ba_images/Q11_output_rev_score_count.png" width="250">
+
+*Insights from output:*
+
 ####  What is the percentage of review_score for 3, 4 and 5 in combined (positive review percentage)
 
 <img src="ba_images/percent_high_review_score.png" width="250">
-
-The percentage of positive reviews is 85.31% which shows a high satisfaction for the product. 
+ 
+*Insights from output:*The percentage of positive reviews is 85.31% which shows a high satisfaction for the product. 
 
 #### Review score by state: Which customer states are the most satisfied?
 
 <img src="ba_images/review_score_by_state.png" width="250">
 
-The *result* shows that the customers from all the states have high satisfaction about the products.
+*Insights from output:* The *result* shows that the customers from all the states have high satisfaction about the products.
 
 #### Review score by product category: which product categories received highest and lowest ratings?
 
 <img src="ba_images/review_score_by_product_cat.png" width="250">
 
-The above query is actually order wise rating, not specific product/category wise rating. The dataset does not provide reviews for specific categories. Since an order may have multiple items, all the items are rated equally for order review. It’s a limitation of the dataset and we cannot reconcile this issue. One way we could follow is that we could first isolate the orders with a single item and then rate based on those orders only.
+*Insights from output:* The above query is actually order wise rating, not specific product/category wise rating. The dataset does not provide reviews for specific categories. Since an order may have multiple items, all the items are rated equally for order review. It’s a limitation of the dataset and we cannot reconcile this issue. One way we could follow is that we could first isolate the orders with a single item and then rate based on those orders only.
 
 
 
