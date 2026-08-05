@@ -1,18 +1,22 @@
-After getting the dataset, the first thing to know is how big the dataset is. How many tables are there and how many rows in each table. Knowing these will give an idea of the size of the dataset at hand.
+# Olist E-Commerce Dataset: Exploratory Data Analysis in SQL
 
-First, let's know how many tables are there in the dataset? The following query will give the result:
+Before diving into complex analysis, it is essential to understand the layout and scale of the data. This exploration uses the Olist Brazilian E-Commerce dataset to inspect table sizes, date ranges, core entity counts, and order distributions over time.
+
+## 1. Dataset Scale & Schema Overview
+
+To get a sense of the database's structural footprint, we start by checking how many tables exist in the schema.
 
 <img src="images/num_tab.png" width="250">
 
-The query output is 9
+*Result:* 9 tables
 
-Next, determine the number of rows in each table. Here is a sample query for one table. The row numbers of the other table can be found using the same query.
+Next, we count the rows in each table to understand where the bulk of the data lives. Below is the query structure used for checking individual table row counts:
 
 <img src="images/num_rows_in_table.png" width="250">
 
-*Query output: 99441*
+*Result: 99441*
 
-similarly we get the following set of information 
+Running similar queries across all tables gives us the following volume breakdown: 
 
 | Table Name | Number of rows |
 | -----------| ---------------|
@@ -26,37 +30,54 @@ similarly we get the following set of information
 | product_category_translation | 71 |
 | geolocation | 2000326 |
 
-*In total, there are 1.55 million rows*
+*Key Takeaways:*
+- Across all tables, the dataset contains over 1.55 million records.
+- The geolocation table is by far the largest, holding over 2 million coordinate entries.
+- Core transaction tables (orders, order_items, order_payments) make up the vast majority of operational activity.
 
-Next, I wanted to know the time/ duration of the transections I will be dealing with. The information lies in the order_purchase_timestamp inside orders table. The following query helps find the information.
+## 2. Transaction Timeframe
+
+To establish the historical scope of the data, we query the minimum and maximum order purchase timestamps in the orders table.
 
 <img src="images/duration_of_transection.png" width="250">
 
-*The query result shows that the transections happened between the years 2016 and 2018*
+*Key Takeaways:*
+- The transactions span from 2016 to 2018.
+- This multi-year window provides enough historical depth to evaluate growth trajectories and seasonal shopping patterns.
 
-Next, I would like to know the number of customers, orders, sellers, and products. These information is found in the respective tables using the following commands.
+## 3. High-Level Entity Summary
+
+Counting unique entities across the core tables helps map out marketplace relationships.
 
 <img src="images/num_customers_orders_sellers_products.png" width="250">
 
-*The marketplace contains approximately 99k customers, 99k orders, 3k sellers, and 33k products. The relatively small number of sellers compared to products suggests that sellers typically offer multiple products, while the near one-to-one ratio between customers and orders indicates that many customers made only a single purchase.*
+*Key Takeaways:*
+- Scale: The marketplace contains roughly 99k customers, 99k orders, 33k distinct products, and 3k sellers.
+- Seller-to-Product Dynamics: With 3,095 sellers listing 32,951 products, the average seller offers ~10 unique items, showing a healthy variety of catalog offerings per merchant.
+- Customer Retention: The near 1:1 ratio between customers and orders (99,441 customers to 99,441 orders) indicates low repeat purchase rates in this dataset—most customer IDs represent one-time buyers.
 
-The next question does not directly focused on dataset exploration but rather related to business question. Still I wanted to know becasue the information will give me an idea about the distribution of the orders in the dataset.
+## Order Distribution Patterns
 
-How are orders distributed over time? This query will also reveal that whether the orders occur evenly over time or there are specific patterns or trends of the orders.
-To find the answer, I counted the orders by month, year, and days.
+Analyzing how order volumes fluctuate across months, years, and days reveals operational activity peaks and customer buying behavior.
 
+### Monthly Trend
 Order by month:
 
 <img src="images/orders_by_month.png" width="250">
 
-*The result shows that the number of orders grew over months, reaching a peak of more than 7k orders in a month.*
+*Insight:* Order volume grew steadily month-over-month, eventually peaking at over 7,000 orders in a single month as the platform gained adoption.
 
+### Yearly Trend
 Order by year:
 
 <img src="images/orders_by_year.png" width="250">
 
-*The number of orders over year also reflect the similar to that of months. The number of orders in 2016 was low, at 329, which grew to 45101 in 2017. In 2018, the toal number of orders were 54011, which surpassed all the records in the prvious two years.*
+- *Insight:* Platform activity accelerated dramatically each year:
+    - 2016: 329 orders (initial platform launch period)
+    - 2017: 45,101 orders (rapid scaling phase)
+    - 2018: 54,011 orders (surpassing total 2017 volume despite covering a partial year)
 
+### Day of the Week Trend: Weekdays vs. Weekends
 Orders by day: do customers buy more on weekdays or weekends?
 
 <img src="images/weekdays_vs_weekend.png" width="250">
@@ -72,7 +93,7 @@ Orders by day: do customers buy more on weekdays or weekends?
 |Saturday|11960|
 |Sunday|10887|
 
-*The number of orders are higher during the weekdays*
+*Insight:* Purchasing activity peaks during early weekdays (Monday and Tuesday) and steadily declines toward the weekend, with Sunday recording the lowest order volume. This indicates that customers are more active shoppers during working hours than on weekends.
 
 
 
