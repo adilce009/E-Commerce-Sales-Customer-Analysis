@@ -1,25 +1,41 @@
-#### Question: Which states contribute most customers?
+## Customer and Seller Distribution Analysis
+
+#### Business Question: Which states contribute most customers?
+
+The customers table was used because it contains customer location information. Since the analysis is at the customer level, no additional joins are required.
 
 <img src="ba_images/customers_states.png" width="250">
 
-Most customers are in state SP (41746). States RJ and MG also have more than 10K customers. Total nunmber of states are 27
+*Output:*
+<img src="ba_images/Q1_output.png" width="250">
 
-#### Question: States vs sellers: Which states contribute the most sellers?
+*Insights from output:* Customer distribution is highly concentrated in SP, which has more than three times the customers of the next largest state (RJ). The customer base is primarily concentrated in the regions SP, RJ, MG, suggesting these regions represent the strongest markets for the platform.
+
+#### Business Question: Which states contribute the most sellers?
+
+The sellers table was used because it contains seller location information. Since the goal is to measure marketplace supply by region, the analysis is performed directly on this table.
 
 <img src="ba_images/sellers_states.png" width="250">
 
-State SP has the heights number of sellers (1849). PR and MG have 349 and 244 sellers consecutively. 
+*Output:*
+<img src="ba_images/Q2_output.png" width="250">
 
+*Insights from output:* Seller distribution is highly concentrated in state SP, which accounts for a dominant share of marketplace sellers compared with other states. Similar to customer distribution, seller presence is strongest in the Southeast region, particularly SP and MG, indicating that this region acts as the primary marketplace hub.
+
+## Payment Analysis
 #### What payment methods are popular?
 
 <img src="ba_images/payment_method.png" width="250">
 
+*Output:* 
+<img src="ba_images/Q3_output.png" width="250">
 *Result* shows that the most popular payment type is credit card. There are 3 more payment methods. 
 
 #### How are review scores distributed?
 
 <img src="ba_images/review_score_dist.png" width="250">
 
+*Output:* <img src="ba_images/Q4_output.png" width="250">
 The reviews are quite positive; most of the reviewers rated it the best.
 
 #### Average review score
@@ -47,6 +63,7 @@ This is a complex situation where three tables should be involved.
 
 <img src="ba_images/rev_by_states.png" width="250">
 
+*Output:* <img src="ba_images/Q5_output_rev_by_state.png" width="250">
 States SP, RJ, and MG contribute to the most amount of revenue. This also alighs with the number of customers and sellers in those states that was shown during dataset analysis. 
 
 #### Find revenue by seller
@@ -64,11 +81,14 @@ Finding the top category product can be with respect to revenue or with respect 
 
 <img src="ba_images/top_cat_revenue.png" width="250">
 
+*Output:* <img src="ba_images/Q6_output_rev_by_prod.png" width="250">
 There are 71 categories of products. The product names are translated into their respective english names with the help of *product_category_translation* table. The *result* of the above query shows that *health_beauty* category generates the most revenue, whereas the *watches_gifts*, *bed_bath_table*, *sports_leisure*, and *computer_accessories* categories are not much behind as well. 
 
 #### Top category with respect to the unit sold
 
 <img src="ba_images/top_cat_unit_sold.png" width="250">
+
+*Output:* <img src="ba_images/Q7_output_sold_by_cat.png" width="250">
 
 *bed_bath_table* category products are sold the most whereas the *health_beauty* category places second. It reveals that the *health_beauty* category products produces higher profit margin.  
 
@@ -77,12 +97,14 @@ There are 71 categories of products. The product names are translated into their
 
 <img src="ba_images/top_sellers_by_revenue.png" width="250">
 
+*Output:* <img src="ba_images/Q8_output_rev_by_seller.png" width="250">
 There are three sellers who made more than 220K revenue.
 
 #### Top sellers by item sold
 
 <img src="ba_images/top_sellers_by_unit_sold.png" width="250">
 
+*Output:* <img src="ba_images/Q9_output_unit_sold_by_seller.png" width="250">
 One of the sellers sold more than 2K units whereas there are two more sellers who sold more than 1900 units.
 
 ### Top customers
@@ -106,6 +128,7 @@ The above query gives the number of times the customers purchased. But if we wan
 
 <img src="ba_images/count_repeat_customers.png" width="250">
 
+*Output:* <img src="ba_images/Q10_output_num_cutomer_type.png" width="250">
 #### New vs Repeat customers: how many customers visited one time and how many customers are loyal and repeat coming?
 This is a complex query that involves multiple steps:
 First subquery: calculate orders per customer.
@@ -121,6 +144,7 @@ Outer query: count how many customers fall into each category.
 
 <img src="ba_images/review_score.png" width="250">
 
+*Output:* <img src="ba_images/Q11_output_rev_score_count.png" width="250">
 ####  What is the percentage of review_score for 3, 4 and 5 in combined (positive review percentage)
 
 <img src="ba_images/percent_high_review_score.png" width="250">
