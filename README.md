@@ -91,16 +91,16 @@ Analyzed key business metrics:
 
 E-Commerce-Sales-Customer-Analysis
 │
-├── data exploration
-│ ├── 01_dataset_overview.md
-│ ├── 02_PrimaryKey_Grain.md
-│ 
-├── business analysis
-│ ├── business_analysis.md
+├── data_exploration
+│   ├── 01_dataset_overview.md
+│   └── 02_PrimaryKey_Grain.md
+│
+├── business_analysis
+│   └── business_analysis.md
 │
 ├── sql
-│ ├── 01_database_creation.sql
-│ ├── 02_exploratory_data_analysis.sql
-│ ├── 03_business_analysis.sql
+│   ├── 01_database_creation.sql
+│   ├── 02_exploratory_data_analysis.sql
+│   └── 03_business_analysis.sql
 │
 └── README.md
