@@ -36,7 +36,7 @@ I first thought about where the required information was stored.
 
 For the month, I needed the order purchase date. This is available in the `orders` table:
 
-```text
+text
 order_purchase_timestamp
 
 For revenue, I needed payment_value, which is in order_payments.
@@ -48,6 +48,7 @@ orders
    | order_id
    ↓
 order_payments
+
 
 ### 3. First attempt: Get the required data
 
@@ -222,5 +223,3 @@ Another important lesson was that when one calculated result needs to be used in
 
 I used AI as a coaching tool during this exercise. I first tried to build each step myself and used hints when I got stuck, especially around LAG(), OVER(), column aliases, and the need for a second query layer.
 
-
-I would keep this **exactly at this level of detail** for the advanced SQL series. It shows your thinking without turning the GitHub page into a long tutorial.
