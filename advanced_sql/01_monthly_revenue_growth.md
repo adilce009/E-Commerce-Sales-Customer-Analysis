@@ -3,11 +3,6 @@
 ## Business Question
 
 **How does monthly revenue change compared with the previous month?**
-
-I wanted to answer this question using the Olist e-commerce dataset and practice the `LAG()` window function.
-
-Instead of directly writing the final query, I tried to break the problem into smaller steps and figure out what information I actually needed.
-
 ---
 
 ### 1. First: What do I need?
@@ -32,23 +27,12 @@ The first month will not have a previous month, so `NULL` is expected.
 
 ### 2. Finding the required tables
 
-I first thought about where the required information was stored.
+Which tables have those required information?
 
-For the month, I needed the order purchase date. This is available in the `orders` table:
+- **Month** ---`orders` table: *order_purchase_timestamp*
+- **Revenue** --- 'order_payments' table : *payment_value*
 
-text
-order_purchase_timestamp
-
-For revenue, I needed payment_value, which is in order_payments.
-The two tables can be connected through:
-orders.order_id = order_payments.order_id
-So the basic relationship is:
-orders
-   |
-   | order_id
-   ↓
-order_payments
-
+To get them together, we need to do INNER JOIN the two tables ON *order_id* columns from both tables.
 
 ### 3. First attempt: Get the required data
 
