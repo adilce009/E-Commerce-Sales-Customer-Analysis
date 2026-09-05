@@ -3,3 +3,104 @@ We can break it into three analytical questions:
 -- Customer retention: How many customers are repeat customers versus one-time customers?
 -- Revenue contribution: How much revenue comes from repeat customers, and what percentage of total revenue do they contribute?
 -- Customer recognition: Who is the highest-spending customer in each state, so they can be considered for a gift/reward?
+
+
+### First, I Needed the Right Revenue Grain
+
+The first challenge appeared when I joined `orders` with `order_payments`.
+
+The number of rows increased from the number of orders. Rather than immediately treating this as a duplication problem, I checked the structure of the payment data.
+
+That revealed an important detail: **one order can have multiple payment records**. In fact, 2,961 orders had more than one payment record, with some orders having as many as seven.
+
+This made sense — an order can be paid using multiple payment methods or payment records.
+
+However, using these rows directly for customer spending could risk counting the same order multiple times.
+
+So I changed the grain of the payment data first:
+
+> **Payment records → one row per order**
+
+I used `SUM(payment_value)` grouped by `order_id` to calculate the total payment associated with each order.
+
+The resulting dataset contained 99,440 paid orders compared with 99,441 orders in the orders table. The one-row difference highlighted another useful data-quality detail: one order did not have a corresponding payment record.
+
+At this point, I had a much safer foundation for calculating customer revenue.
+
+---
+
+### Finding Repeat Customers
+
+Next, I connected the paid orders to customers.
+
+One important distinction here was between `customer_id` and `customer_unique_id`.
+
+For this analysis, I needed to identify the **actual customer**, not simply the customer record associated with an order. Therefore, repeat purchasing behavior was evaluated using `customer_unique_id`.
+
+I checked how many orders were associated with each unique customer.
+
+The result was interesting:
+
+- **96,095 unique customers** were represented in the paid-order data.
+- Some customers had made multiple purchases.
+- The most frequent customer in the dataset had **17 orders**.
+
+This confirmed that repeat purchasing was present and that `customer_unique_id` was the appropriate level for customer-retention analysis.
+
+---
+
+### From Customer Spending to State-Level Spending
+
+The next step was to calculate how much each customer had spent.
+
+Rather than simply grouping by customer, I grouped by:
+
+`customer_unique_id + customer_state`
+
+This was important because the business question was not simply:
+
+> Who spent the most?
+
+It was:
+
+> **Who spent the most within each state?**
+
+This produced a dataset where each row represented:
+
+> **One customer in one state, with their total spending in that state.**
+
+If a customer made several purchases from the same state, those purchases were combined into one spending total.
+
+Interestingly, I also found that **30 customers appeared across two or more states**. This did not prevent the analysis because their spending was intentionally being evaluated at the customer-state level. Their spending in each state remained separate.
+
+---
+
+### Ranking the Customers
+
+With customer spending aggregated at the correct level, the final challenge was identifying the highest spender in every state.
+
+This was a good opportunity to use a window function rather than simply sorting the entire dataset.
+
+I used `RANK()` with `PARTITION BY customer_state`, which allowed the ranking to restart independently for each state.
+
+The final result identified the **top-spending customer in every state**.
+
+Using `RANK()` also has a useful business advantage: if two customers are tied for the highest spending in a state, both are retained rather than arbitrarily choosing one.
+
+---
+
+### What This Analysis Demonstrates
+
+Although the final business question sounds simple, answering it correctly required several layers of SQL reasoning:
+
+- Investigating table grain before aggregating revenue
+- Identifying a one-to-many relationship between orders and payments
+- Aggregating payment records to the order level
+- Using `customer_unique_id` to identify actual customers
+- Aggregating spending at the customer-state level
+- Using window functions to rank customers within each state
+- Validating unexpected differences in row counts and customer-state relationships
+
+The main lesson was that **getting the grain right is often more important than writing a complicated query**. Once the data was at the right level, the final ranking became relatively straightforward.
+
+The analysis ultimately turns raw transaction records into something a business could actually act on: **a state-by-state list of its highest-value customers that could support targeted customer appreciation or loyalty initiatives.**
